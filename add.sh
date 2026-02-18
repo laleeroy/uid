@@ -17,15 +17,34 @@ select usertype in "public" "private"; do
   case $usertype in
     public)
       echo "Add $uid to public lists..."
+      
+      # Check if UID exists in public.uid
+      if grep -Fxq "$uid" public.uid; then
+        echo "UID $uid already exists in public.uid. Adding to temporary.uid only..."
+      else
+        echo "Adding new UID $uid to public.uid..."
+        echo "$uid" >> public.uid
+      fi
+      
+      # Always add to temporary.uid
       echo "$uid" >> temporary.uid
-      echo "$uid" >> public.uid
       break
       ;;
+      
     private)
       echo "Add $uid to private list..."
-      echo "$uid" >> private.uid
-      break
+      
+      # Check if UID exists in private.uid
+      if grep -Fxq "$uid" private.uid; then
+        echo "UID $uid already exists in private.uid. Skipping addition..."
+        break
+      else
+        echo "Adding new UID $uid to private.uid..."
+        echo "$uid" >> private.uid
+        break
+      fi
       ;;
+      
     *)
       echo "Invalid choice. Please choose 1 or 2."
       ;;
