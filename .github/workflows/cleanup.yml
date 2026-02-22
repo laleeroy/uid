@@ -15,7 +15,7 @@ jobs:
       - name: Keep only lines 1–3 in temporary.uid
         run: |
           if [ -f temporary.uid ]; then
-            head -n 1 temporary.uid > temp && mv temp temporary.uid
+            head -n 2 temporary.uid > temp && mv temp temporary.uid
           else
             echo "temporary.uid not found, skipping"
           fi
