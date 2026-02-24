@@ -20,9 +20,9 @@ select usertype in "public" "private"; do
       
       # Check if UID exists in public.uid
       if grep -Fxq "$uid" public.uid; then
-        echo "UID $uid already exists in public.uid. Adding to temporary.uid only..."
+        echo "UID $uid already exists in public.uid. Add to temporary.uid only..."
       else
-        echo "Adding new UID $uid to public.uid..."
+        echo "Add new UID $uid to public.uid..."
         echo "$uid" >> public.uid
       fi
       
@@ -39,7 +39,7 @@ select usertype in "public" "private"; do
         echo "UID $uid already exists in private.uid. Skipping addition..."
         break
       else
-        echo "Adding new UID $uid to private.uid..."
+        echo "Add new UID $uid to private.uid..."
         echo "$uid" >> private.uid
         break
       fi
@@ -53,7 +53,7 @@ done
 
 # Build commit message
 if [[ -z "$username" ]]; then
-  commit_msg="Adding $uid to the $usertype list"
+  commit_msg="Add $uid to the $usertype list"
 else
   commit_msg="Add user: $username ($uid) to $usertype list"
 fi
